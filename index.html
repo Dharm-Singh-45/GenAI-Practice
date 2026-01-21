@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Learning Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>⚙️ Settings</h2>
+                    <button class="close-modal" onclick="closeSettings()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="apiKeyInput">Gemini API Key:</label>
+                        <input type="password" id="apiKeyInput" placeholder="Enter your API key">
+                        <small>Get your free API key from
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank">
+                        Google AI Studio</a></small>
+                    </div>
+                    <button class="save-btn" onclick="saveSettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>🎓 DSA Learning Assistant</h1>
+                    <p>Your AI-powered Data Structures & Algorithms tutor</p>
+                </div>
+                <button class="settings-btn" onclick="openSettings()" title="Settings">
+                    ⚙️
+                </button>
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalQuestions">0</div>
+                            <div class="stat-label">Total Questions</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="successRate">100%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="avgTime">0s</div>
+                            <div class="stat-label">Avg Response</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Chat Area -->
+            <div class="chat-section">
+                <div class="chat-container" id="chatContainer">
+                    <div class="welcome-message">
+                        <h2>Welcome! 👋</h2>
+                        <p>Ask me anything about Data Structures and Algorithms</p>
+                        <div class="example-questions">
+                            <p><strong>Try asking:</strong></p>
+                            <button class="example-btn"
+                            onclick="setQuestion('What is backtracking algorithm?')">
+                            What is backtracking?</button>
+                            <button class="example-btn"
+                            onclick="setQuestion('Explain binary search with code')">
+                            Binary search with code</button>
+                            <button class="example-btn"
+                            onclick="setQuestion('What is time complexity?')">
+                            Time complexity</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-container">
+                    <textarea id="questionInput"
+                    placeholder="Ask your DSA question here..."
+                    rows="3"></textarea>
+                    <button id="sendBtn" onclick="askQuestion()">
+                        <span id="btnText">Send</span>
+                        <span id="btnLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- History Sidebar -->
+            <div class="history-section">
+                <div class="history-header">
+                    <h3>📚 History</h3>
+                    <button class="clear-btn" onclick="clearHistory()"
+                    title="Clear all history">🗑️</button>
+                </div>
+                
+                <!-- Stats Summary -->
+                <div class="history-stats">
+                    <div class="mini-stat">
+                        <span class="mini-stat-label">Questions:</span>
+                        <span class="mini-stat-value" id="sidebarTotal">0</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-stat-label">Success:</span>
+                        <span class="mini-stat-value success-text" id="sidebarSuccess">0</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-stat-label">Failed:</span>
+                        <span class="mini-stat-value error-text" id="sidebarFailed">0</span>
+                    </div>
+                </div>
+
+                <!-- Search History -->
+                <div class="history-search">
+                    <input type="text" id="historySearch"
+                    placeholder="🔍 Search history..." onkeyup="filterHistory()">
+                </div>
+
+                <div class="history-container" id="historyContainer">
+                    <p class="empty-history">No questions asked yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
